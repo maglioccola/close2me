@@ -1,7 +1,10 @@
 import * as React from 'react';
 import axios from 'axios';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import '../style.scss'
+import './css/search.css'
 
 type State = {
     results: [];
@@ -34,7 +37,12 @@ export default class Search extends React.Component<void, State> {
     render() {
         return (
             <div>
-                <h3>Cerca</h3>
+                <div className="search-container">
+                    <form action="/action_page.php">
+                        <input type="text" placeholder="Search.." name="search" />
+                        <button type="submit"><i className="fa fa-search"></i></button>
+                    </form>
+                </div>
             </div>
         );
     }
