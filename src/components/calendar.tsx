@@ -12,7 +12,7 @@ interface CalendarState {
   calendarEvents: EventInput[]
 }
 
-export default class Calendar extends React.Component<{}, DemoAppState> {
+export default class Calendar extends React.Component<{}, CalendarState> {
 
   calendarComponentRef = React.createRef<FullCalendar>()
 

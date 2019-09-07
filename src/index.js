@@ -5,7 +5,7 @@ import Search from './components/search'
 import Categories from './components/categories'
 import Calendar from './components/calendar'
 
-import '../style.scss'
+import './style.scss'
 
 class App extends React.Component {
 
