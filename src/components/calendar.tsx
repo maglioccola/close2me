@@ -5,14 +5,14 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
 
-import '../calendar.scss'
+import '../style.scss'
 
-interface DemoAppState {
+interface CalendarState {
   calendarWeekends: boolean
   calendarEvents: EventInput[]
 }
 
-export default class DemoApp extends React.Component<{}, DemoAppState> {
+export default class Calendar extends React.Component<{}, DemoAppState> {
 
   calendarComponentRef = React.createRef<FullCalendar>()
 
@@ -29,13 +29,13 @@ export default class DemoApp extends React.Component<{}, DemoAppState> {
 
   render() {
     return (
-      <div className='demo-app'>
-        <div className='demo-app-top'>
+      <div className='close2me'>
+        <div className='close2me-top'>
           <button onClick={ this.toggleWeekends }>toggle weekends</button>&nbsp;
           <button onClick={ this.gotoPast }>go to a date in the past</button>&nbsp;
           (also, click a date/time to add an event)
         </div>
-        <div className='demo-app-calendar'>
+        <div className='close2me-calendar'>
           <FullCalendar
             defaultView="dayGridMonth"
             header={{

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Campo from './campo';
 import axios from 'axios';
-import '../index.css';
+
+import '../style.scss'
 
 const FIVE_SECONDS: number = 5000;
 const FIVE_MINUTES: number = 300000;

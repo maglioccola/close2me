@@ -1,6 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
-import '../index.css';
+
+import '../style.scss'
 
 type State = {
     results: [];
