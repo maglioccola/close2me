@@ -30,13 +30,9 @@ export default class Calendar extends React.Component<{}, CalendarState> {
   render() {
     return (
       <div className='close2me'>
-        <div className='close2me-top'>
-          <button onClick={ this.toggleWeekends }>toggle weekends</button>&nbsp;
-          <button onClick={ this.gotoPast }>go to a date in the past</button>&nbsp;
-          (also, click a date/time to add an event)
-        </div>
         <div className='close2me-calendar'>
           <FullCalendar
+          locale="italian"
             defaultView="dayGridMonth"
             header={{
               left: 'prev,next today',

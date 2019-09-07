@@ -13,10 +13,11 @@
     "@types/react-table": "^6.7.20",
     "axios": "latest",
     "bootstrap": "^4.3.1",
-    "font-awesome": "^4.7.0",
+    "font-awesome": "latest",
     "node-sass": "^4.12.0",
     "react": "latest",
     "react-dom": "latest",
+    "react-multi-carousel": "^2.2.5",
     "react-scripts": "latest",
     "typescript": "latest"
   },

@@ -1,117 +1,85 @@
 import * as React from 'react';
-import Campo from './campo';
 import axios from 'axios';
+import Category from './category'
 
 import '../style.scss'
 
-const FIVE_SECONDS: number = 5000;
-const FIVE_MINUTES: number = 300000;
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-const COLOR: string[] = ["LightCoral", "cyan", "SkyBlue", "LightYellow"];
-
-var divStyle: React.CSSProperties = {
-  fontWeight: "bold",
-  fontSize: 72,
-  textAlign: "center",
-  background: "green"
-};
-
-type TypeTicket = {
-  errore: string;
-  nome: string;
-  twsappl: string;
-  destinatario: string;
+type CategoryType = {
+  id: string;
+  title: string;
+  iconName: string;
+  color: string;
 }
 
 type State = {
   message: string;
-  tickets: [];
-  ticket: TypeTicket;
-  counter: number;
-  backgroundColor: string,
-  intervalId: any
+  categories: [];
 }
 
-export default class Ticket extends React.Component<void, State> {
+export default class Categories extends React.Component<void, State> {
 
   constructor(props: any) {
     super(props);
     this.state = {
       message: "",
-      tickets: [],
-      ticket: {
-        errore: "",
-        nome: "",
-        twsappl: "",
-        destinatario: ""
-      },
-      counter: 0,
-      backgroundColor: COLOR[0],
-      intervalId: null
+      categories: []
     }
   }
 
-  getTickets = () => {
-    if (this.state.intervalId != null) {
-      clearInterval(this.state.intervalId);
-    }
+  getCategories = () => {
     axios
-      .get('http://10.30.102.34:8090/ticket/all')
+      .get('http://192.168.44.9:8080/categories/')
       .then(res => {
-        if(res.data.length > 0) {
-          var intervalId = setInterval(this.nextTicket, FIVE_SECONDS);
-          this.setState({ message: "", tickets: res.data, intervalId: intervalId });
+        if (res.data.length > 0) {
+          this.setState({ message: "", categories: res.data });
         } else {
-          this.setState({ message: "TWS", tickets: [], intervalId: null });
+          this.setState({ message: "TWS", categories: [] });
         }
       }).catch(error => {
-        this.setState({ tickets: [], message: error.message });
+        this.setState({ categories: [], message: error.message });
       });
   }
 
-  nextTicket = () => {
-    if (this.state.counter == this.state.tickets.length) {
-      this.setState({ counter: 0 });
-    }
-    this.setState({
-      ticket: this.state.tickets[this.state.counter], counter: this.state.counter + 1,
-      backgroundColor: COLOR[this.state.counter]
-    });
-  }
-
   componentDidMount() {
-    this.getTickets();
-    setInterval(this.getTickets, FIVE_MINUTES);
+    this.getCategories();
   }
 
   render() {
-    if (this.state.tickets.length == 0) {
+    if (this.state.categories.length == 0) {
       return (
-        <div style={divStyle}>{this.state.message}</div>
+        <div>{this.state.message}</div>
       );
     }
     else {
+      const responsive = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 4,
+          slidesToSlide: 4, // optional, default to 1.
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2,
+          slidesToSlide: 2, // optional, default to 1.
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1,
+          slidesToSlide: 1, // optional, default to 1.
+        },
+      };
       return (
-        <div className="table" style={{ backgroundColor: COLOR[this.state.counter % 4] }} >
-          <div className="tableBody" >
-            <div className="row">
-              <div className="cell middle widthHalf">
-                <Campo value={this.state.ticket.errore} />
-              </div>
-              <div className="cell middle widthHalf">
-                <Campo value={this.state.ticket.nome} />
-              </div>
-            </div>
-            <div className="row">
-              <div className="cell middle widthHalf">
-                <Campo value={this.state.ticket.twsappl} />
-              </div>
-              <div className="cell middle widthHalf">
-                <Campo value={this.state.ticket.destinatario} />
-              </div>
-            </div>
-          </div>
-        </div>
+        <Carousel responsive={responsive}>
+          {
+            this.state.categories.map((category: CategoryType, i) => {
+              return <Category id={category.id} title={category.title} iconName={category.iconName} color={category.color} />
+            })
+          }
+
+        </Carousel>
       );
     }
   }
