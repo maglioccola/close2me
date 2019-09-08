@@ -12,6 +12,11 @@ type CategoryType = {
   title: string;
   iconName: string;
   color: string;
+  url: string;
+}
+
+type Props = {
+  onSelect: any;
 }
 
 type State = {
@@ -20,9 +25,9 @@ type State = {
   selected: string;
 }
 
-export default class Categories extends React.Component<void, State> {
+export default class Categories extends React.Component<Props, State> {
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       message: "",
@@ -38,7 +43,7 @@ export default class Categories extends React.Component<void, State> {
         if (res.data.length > 0) {
           this.setState({ message: "", categories: res.data });
         } else {
-          this.setState({ message: "TWS", categories: [] });
+          this.setState({ message: "No data", categories: [] });
         }
       }).catch(error => {
         this.setState({ categories: [], message: error.message });
@@ -78,7 +83,7 @@ export default class Categories extends React.Component<void, State> {
           <Carousel responsive={responsive}>
             {
               this.state.categories.map((category: CategoryType, i) => {
-                return <Category id={category.id} title={category.title} iconName={category.iconName} color={category.color} onClick={() => this.handleClick(category.id)} selected={this.state.selected[i]} />
+                return <Category id={category.id} title={category.title} iconName={category.iconName} color={category.color} onClick={() => this.handleClick(category.id, category.url)} selected={this.state.selected} />
               })
             }
           </Carousel>
@@ -87,18 +92,9 @@ export default class Categories extends React.Component<void, State> {
     }
   }
 
-  handleClick(index: string) {
-    var flags = "";
-    for (var i = 0; i < this.state.categories.length; i++) {
-      if (i == parseInt(index) - 1) {
-        flags += "1";
-      }
-      else {
-        flags += "0"
-      }
-    }
-    const selected = Object.assign({}, this.state.selected, flags);
-    this.setState({ selected: selected });
+  handleClick(index: string, url: string) {
+    this.setState({ selected: index });
+    this.props.onSelect(url);
   }
 
 }

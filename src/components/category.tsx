@@ -20,6 +20,8 @@ type State = {
 
 export default class Category extends React.Component<Props, State> {
 
+  private isSelected = false;
+
   constructor(props: any) {
     super(props);
   }
@@ -28,9 +30,10 @@ export default class Category extends React.Component<Props, State> {
   }
 
   render() {
+    this.isSelected = this.props.selected == this.props.id;
     const divStyle = {
       backgroundColor: this.props.color,
-      color: this.props.selected=="1"?"whitesmoke":"#333333"
+      color: this.isSelected ? "whitesmoke" : "#333333"
     };
     return (
       <div id="{this.props.id}" className="card" style={divStyle} onClick={() => this.props.onClick()}>
