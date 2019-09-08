@@ -17,7 +17,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: []
+      url: "",
+      results: [],
+      message: ""
     };
   }
 
@@ -28,16 +30,17 @@ class App extends React.Component {
         <ScrollUpButton />
         <Header company="Close2Me" />
         <Categories onSelect={(url) => this.handleSelect(url)} />
-        <Search />
+        <Search url={this.state.url} onSearch={(keywords) => this.handleSearch(keywords)} />
         <Results results={this.state.results} />
-        <Calendar />
+        <Calendar events={this.state.results} />
       </div>
     );
   }
 
   handleSelect(url) {
+    let requestUrl = properties.host + url;
     axios
-      .get(properties.host + url, {
+      .get(requestUrl, {
         params: {
           keywords: '',
           latitude: 45.693161,
@@ -45,7 +48,22 @@ class App extends React.Component {
         }
       })
       .then(res => {
-        console.log(res.data);
+        this.setState({ url: requestUrl, results: res.data, message: "" });
+      }).catch(error => {
+        this.setState({ url: "", results: [], message: error.message });
+      });
+  }
+
+  handleSearch(keywords) {
+    axios
+      .get(this.state.url, {
+        params: {
+          keywords: keywords,
+          latitude: 45.693161,
+          longitude: 9.5970498
+        }
+      })
+      .then(res => {
         this.setState({ results: res.data, message: "" });
       }).catch(error => {
         this.setState({ results: [], message: error.message });

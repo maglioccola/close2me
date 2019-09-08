@@ -1,5 +1,5 @@
 import * as React from 'react';
-import axios from 'axios';
+import { EventType } from '../types';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -9,27 +9,10 @@ type Props = {
     results: [];
 }
 
-type EventType = {
-    id: string;
-    categoryId: string;
-    longitude: string;
-    latitude: string;
-    dateFrom: string;
-    dateTo: string;
-    title: string;
-    note: string;
-    metadata: string;
-    link: string;
-}
-
 export default class Results extends React.Component<Props> {
 
     constructor(props: any) {
         super(props);
-    }
-
-    componentDidMount() {
-
     }
 
     render() {
@@ -47,7 +30,7 @@ export default class Results extends React.Component<Props> {
                                         <a href={evento.link} target="_new">
                                             <div className="card-body">
                                                 <h5 className="card-title">{evento.title}</h5>
-                                                <p className="card-text"><small className="text-muted">{evento.dateFrom}</small></p>
+                                                <p className="card-text"><small className="text-muted">{evento.formattedDate}</small></p>
                                             </div>
                                         </a>
                                     </div>

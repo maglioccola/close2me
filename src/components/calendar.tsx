@@ -3,27 +3,29 @@ import FullCalendar from '@fullcalendar/react'
 import { EventInput } from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
+import interactionPlugin from '@fullcalendar/interaction'
+
+import { EventType } from '../types'
 
 import '../style.scss'
 
 interface CalendarState {
   calendarWeekends: boolean
-  calendarEvents: EventInput[]
 }
 
-export default class Calendar extends React.Component<{}, CalendarState> {
+type Props = {
+  events: EventType[];
+}
+
+export default class Calendar extends React.Component<Props, CalendarState> {
 
   calendarComponentRef = React.createRef<FullCalendar>()
 
-  constructor(props: {}) {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
-      calendarWeekends: true,
-      calendarEvents: [ // initial event data
-        { title: 'Event Now', start: new Date() }
-      ]
+      calendarWeekends: true
     }
   }
 
@@ -42,7 +44,7 @@ export default class Calendar extends React.Component<{}, CalendarState> {
             plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
             ref={ this.calendarComponentRef }
             weekends={ this.state.calendarWeekends }
-            events={ this.state.calendarEvents }
+            events={ this.props.events }
             dateClick={ this.handleDateClick }
             />
         </div>
