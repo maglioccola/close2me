@@ -1,5 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
+import { properties } from '../properties.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -22,7 +23,7 @@ export default class Search extends React.Component<void, State> {
 
     getData() {
         axios
-        .get('http://192.168.44.9:8080/categories/')
+        .get(properties.host + '/categories/')
             .then(res => {
                 this.setState({ results: res.data, message: "" });
             }).catch(error => {
@@ -52,4 +53,3 @@ export default class Search extends React.Component<void, State> {
     }
 
 }
-

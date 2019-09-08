@@ -19,6 +19,7 @@
     "react-dom": "latest",
     "react-multi-carousel": "^2.2.5",
     "react-scripts": "latest",
+    "react-scroll-up-button": "^1.6.4",
     "typescript": "latest"
   },
   "scripts": {

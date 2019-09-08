@@ -2,6 +2,8 @@ import * as React from 'react';
 import axios from 'axios';
 import Category from './category'
 
+import { properties } from '../properties.js';
+
 import '../style.scss'
 
 import Carousel from 'react-multi-carousel';
@@ -38,7 +40,7 @@ export default class Categories extends React.Component<Props, State> {
 
   getCategories = () => {
     axios
-      .get('http://192.168.44.9:8080/categories/')
+      .get(properties.host + '/categories/')
       .then(res => {
         if (res.data.length > 0) {
           this.setState({ message: "", categories: res.data });
