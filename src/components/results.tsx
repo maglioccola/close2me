@@ -24,7 +24,7 @@ export default class Results extends React.Component<Props> {
                             <div className="card mb-3">
                                 <div className="row no-gutters">
                                     <div className="col-md-4">
-                                        <img src="..." className="card-img" alt="..." />
+                                        <img src={"http://lorempixel.com/100/100?t=" + i} className="card-img card-little" alt="..." />
                                     </div>
                                     <div className="col-md-8">
                                         <a href={evento.link} target="_new">
@@ -39,10 +39,7 @@ export default class Results extends React.Component<Props> {
                         )
                     })
                 }
-
             </div>
         );
     }
-
 }
-

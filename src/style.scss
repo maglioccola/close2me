@@ -2,9 +2,14 @@
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
 
+@media only screen and (min-width: 768px) {
+  body {
+    margin-left: 3em;
+    margin-right: 3em;
+  }
+}
+
 body {
-  margin-left: 3em;
-  margin-right: 3em;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
   color: #333333;
@@ -39,4 +44,14 @@ body {
 .card label {
   font-size: 20px;
   float: right;
+}
+
+.card-little {
+  height: 100px;
+  width: 100px;
+}
+
+.list-group {
+  margin-left: 3em;
+  margin-right: 3em;
 }

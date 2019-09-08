@@ -1,6 +1,4 @@
 import * as React from 'react';
-import axios from 'axios';
-import { properties } from '../properties.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
