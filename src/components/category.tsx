@@ -10,6 +10,8 @@ type Props = {
   title: string;
   iconName: string;
   color: string;
+  onClick: any;
+  selected: string;
 }
 
 type State = {
@@ -27,10 +29,11 @@ export default class Category extends React.Component<Props, State> {
 
   render() {
     const divStyle = {
-      backgroundColor: this.props.color
+      backgroundColor: this.props.color,
+      color: this.props.selected=="1"?"whitesmoke":"#333333"
     };
     return (
-      <div id="{this.props.id}" className="card" style={divStyle}>
+      <div id="{this.props.id}" className="card" style={divStyle} onClick={() => this.props.onClick()}>
         <i className={this.props.iconName}></i>
         <label>{this.props.title}</label>
       </div>

@@ -17,6 +17,7 @@ type CategoryType = {
 type State = {
   message: string;
   categories: [];
+  selected: string;
 }
 
 export default class Categories extends React.Component<void, State> {
@@ -25,7 +26,8 @@ export default class Categories extends React.Component<void, State> {
     super(props);
     this.state = {
       message: "",
-      categories: []
+      categories: [],
+      selected: ""
     }
   }
 
@@ -76,13 +78,27 @@ export default class Categories extends React.Component<void, State> {
           <Carousel responsive={responsive}>
             {
               this.state.categories.map((category: CategoryType, i) => {
-                return <Category id={category.id} title={category.title} iconName={category.iconName} color={category.color} />
+                return <Category id={category.id} title={category.title} iconName={category.iconName} color={category.color} onClick={() => this.handleClick(category.id)} selected={this.state.selected[i]} />
               })
             }
           </Carousel>
         </div>
       );
     }
+  }
+
+  handleClick(index: string) {
+    var flags = "";
+    for (var i = 0; i < this.state.categories.length; i++) {
+      if (i == parseInt(index) - 1) {
+        flags += "1";
+      }
+      else {
+        flags += "0"
+      }
+    }
+    const selected = Object.assign({}, this.state.selected, flags);
+    this.setState({ selected: selected });
   }
 
 }
