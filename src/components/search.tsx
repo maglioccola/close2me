@@ -22,7 +22,7 @@ export default class Search extends React.Component<void, State> {
 
     getData() {
         axios
-            .get('TODO')
+        .get('http://192.168.44.9:8080/categories/')
             .then(res => {
                 this.setState({ results: res.data, message: "" });
             }).catch(error => {

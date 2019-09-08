@@ -12,7 +12,11 @@ type Props = {
   color: string;
 }
 
-export default class Category extends React.Component<Props> {
+type State = {
+  color: string;
+}
+
+export default class Category extends React.Component<Props, State> {
 
   constructor(props: any) {
     super(props);
@@ -22,12 +26,15 @@ export default class Category extends React.Component<Props> {
   }
 
   render() {
-      return (
-        <div id="{this.props.id}" className="card">
-          <i className={this.props.iconName}></i>
-          <label>{this.props.title}</label>
-        </div>
-      );
+    const divStyle = {
+      backgroundColor: this.props.color
+    };
+    return (
+      <div id="{this.props.id}" className="card" style={divStyle}>
+        <i className={this.props.iconName}></i>
+        <label>{this.props.title}</label>
+      </div>
+    );
   }
 
 }

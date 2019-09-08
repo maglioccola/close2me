@@ -72,14 +72,15 @@ export default class Categories extends React.Component<void, State> {
         },
       };
       return (
-        <Carousel responsive={responsive}>
-          {
-            this.state.categories.map((category: CategoryType, i) => {
-              return <Category id={category.id} title={category.title} iconName={category.iconName} color={category.color} />
-            })
-          }
-
-        </Carousel>
+        <div>
+          <Carousel responsive={responsive}>
+            {
+              this.state.categories.map((category: CategoryType, i) => {
+                return <Category id={category.id} title={category.title} iconName={category.iconName} color={category.color} />
+              })
+            }
+          </Carousel>
+        </div>
       );
     }
   }
